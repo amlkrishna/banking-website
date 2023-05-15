@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fill The Details</title>
+    <link rel="stylesheet" href="/static/css/lastpage.css">
+</head>
+<body>
+      <div class="container">
+          <img src="/static/images/background.jpg">
+          <div class="fillform">
+              <button onclick="document.getElementById('user-login').style.display = 'block' " id="login" type="submit" class="login-button">Click to view the form</button>
+          </div>
+          <div id="user-login" class="login-form">
+
+              <form action="" class="login-container" method="post" id="myForm">
+              <h1>Fill The Form</h1>
+                  <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="0" max="120" required><br>
+
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+
+        <label for="female">Female</label><br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required></textarea><br>
+
+<label for="district">District:</label>
+                  <select id="district" name="district" required onchange="populateSubDistrict()">
+                      <option value="">--Select District--</option>
+                      <option value="alappuzha">Alappuzha</option>
+                      <option value="ernakulam">Ernakulam</option>
+                      <option value="idukki">Idukki</option>
+                      <option value="kannur">Kannur</option>
+                      <option value="kasaragod">Kasaragod</option>
+                      <option value="kollam">Kollam</option>
+                      <option value="kottayam">Kottayam</option>
+                      <option value="kozhikode">Kozhikode</option>
+                      <option value="malappuram">Malappuram</option>
+                      <option value="palakkad">Palakkad</option>
+                      <option value="pathanamthitta">Pathanamthitta</option>
+                      <option value="thiruvananthapuram">Thiruvananthapuram</option>
+                      <option value="thrissur">Thrissur</option>
+                      <option value="wayanad">Wayanad</option>
+                  </select><br>
+        <label for="sub-district">Sub-District:</label>
+                  <select id="sub-district" name="sub-district" required>
+                      <option value="">--Select Sub-District--</option>
+                  </select><br>
+
+
+
+        <label for="account-type">Account Type:</label>
+        <select id="account-type" name="account-type" required>
+            <option value="">--Select Account Type--</option>
+            <option value="savings">Savings</option>
+            <option value="current">Current</option>
+            <option value="fixed-deposit">Fixed Deposit</option>
+            <option value="recurring-deposit">Recurring Deposit</option>
+        </select><br>
+
+        <label>Materials Provided:</label>
+        <input type="checkbox" id="debit-card" name="debit-card" value="debit-card">
+        <label for="debit-card">Debit Card</label>
+        <input type="checkbox" id="credit-card" name="credit-card" value="credit-card">
+        <label for="credit-card">Credit Card</label>
+        <input type="checkbox" id="cheque-book" name="cheque-book" value="cheque-book">
+        <label for="cheque-book">Cheque Book</label><br>
+
+        <button type="submit">Submit</button>
+
+              </form>
+              <a href="{% url 'index' %}">
+                     <button type="submit">Log Out</button>
+                     </a>
+
+          </div>
+      </div>
+        <div id="success-message" style="display:none; ">Application Accepted <br><br>
+            <a id="home-link" href="{% url 'index' %}">Click Here To Go Home</a>
+        </div>
+
+               <script>
+
+const districtSelect = document.getElementById("district");
+const subDistrictSelect = document.getElementById("sub-district");
+
+districtSelect.addEventListener("change", function() {
+    subDistrictSelect.innerHTML = "<option value=''>--Select Sub-District--</option>"; // add this line to add the first option to the sub-district dropdown
+    if (districtSelect.value === "alappuzha") {
+  subDistrictSelect.innerHTML += "<option value='a'>Ambalappuzha</option>";
+  subDistrictSelect.innerHTML += "<option value='c'>Chengannur</option>";
+  subDistrictSelect.innerHTML += "<option value='h'>Haripad</option>";
+  subDistrictSelect.innerHTML += "<option value='k'>Karunagappally</option>";
+  subDistrictSelect.innerHTML += "<option value='m'>Mavelikkara</option>";
+    } else if (districtSelect.value === "ernakulam") {
+  subDistrictSelect.innerHTML += "<option value='a'>Aluva</option>";
+  subDistrictSelect.innerHTML += "<option value='a'>Angamaly</option>";
+  subDistrictSelect.innerHTML += "<option value='k'>Kochi</option>";
+  subDistrictSelect.innerHTML += "<option value='k'>Kothamangalam</option>";
+  subDistrictSelect.innerHTML += "<option value='m'>Muvattupuzha</option>";
+  subDistrictSelect.innerHTML += "<option value='p'>Perumbavoor</option>";
+} else if (districtSelect.value === "idukki") {
+  subDistrictSelect.innerHTML += "<option value='a'>Adimali</option>";
+  subDistrictSelect.innerHTML += "<option value='i'>Idukki</option>";
+  subDistrictSelect.innerHTML += "<option value='k'>Kattappana</option>";
+  subDistrictSelect.innerHTML += "<option value='m'>Munnar</option>";
+  subDistrictSelect.innerHTML += "<option value='n'>Nedumkandam</option>";
+} else if (districtSelect.value === "kannur") {
+  subDistrictSelect.innerHTML += "<option value='i'>Iritty</option>";
+  subDistrictSelect.innerHTML += "<option value='k'>Kannur</option>";
+  subDistrictSelect.innerHTML += "<option value='k'>Kuthuparamba</option>";
+  subDistrictSelect.innerHTML += "<option value='t'>Thalassery</option>";
+} else if (districtSelect.value === "kasaragod") {
+  subDistrictSelect.innerHTML += "<option value='k'>Kasaragod</option>";
+  subDistrictSelect.innerHTML += "<option value='k'>Kanhangad</option>";
+} else if (districtSelect.value === "kollam") {
+  subDistrictSelect.innerHTML += "<option value='a'>Adoor</option>";
+  subDistrictSelect.innerHTML += "<option value='k'>Kollam</option>";
+  subDistrictSelect.innerHTML += "<option value='k'>Kottarakkara</option>";
+  subDistrictSelect.innerHTML += "<option value='p'>Punalur</option>";
+} else if (districtSelect.value === "kottayam") {
+  subDistrictSelect.innerHTML += "<option value='c'>Changanassery</option>";
+  subDistrictSelect.innerHTML += "<option value='e'>Ettumanoor</option>";
+  subDistrictSelect.innerHTML += "<option value='k'>Kanjirappally</option>";
+  subDistrictSelect.innerHTML += "<option value='k'>Kottayam</option>";
+  subDistrictSelect.innerHTML += "<option value='p'>Pala</option>";
+} else if (districtSelect.value === "kozhikode") {
+        subDistrictSelect.innerHTML += "<option value='calicut'>Calicut</option>";
+        subDistrictSelect.innerHTML += "<option value='kozhikode'>Kozhikode</option>";
+        subDistrictSelect.innerHTML += "<option value='kozhikode-rural'>Kozhikode Rural</option>";
+        subDistrictSelect.innerHTML += "<option value='panthalayini'>Panthalayini</option>";
+        subDistrictSelect.innerHTML += "<option value='thalassery'>Thalassery</option>";
+        subDistrictSelect.innerHTML += "<option value='vatakara'>Vatakara</option>";
+    } else if (districtSelect.value === "malappuram") {
+        subDistrictSelect.innerHTML += "<option value='erinjipalam'>Erinjipalam</option>";
+        subDistrictSelect.innerHTML += "<option value='manjeri'>Manjeri</option>";
+        subDistrictSelect.innerHTML += "<option value='nilambur'>Nilambur</option>";
+        subDistrictSelect.innerHTML += "<option value='pandikkad'>Pandikkad</option>";
+        subDistrictSelect.innerHTML += "<option value='perinthalmanna'>Perinthalmanna</option>";
+        subDistrictSelect.innerHTML += "<option value='tirur'>Tirur</option>";
+    } else if (districtSelect.value === "palakkad") {
+        subDistrictSelect.innerHTML += "<option value='cherpulassery'>Cherpulassery</option>";
+        subDistrictSelect.innerHTML += "<option value='ottapalam'>Ottapalam</option>";
+        subDistrictSelect.innerHTML += "<option value='palakkad'>Palakkad</option>";
+        subDistrictSelect.innerHTML += "<option value='shornur'>Shornur</option>";
+    } else if (districtSelect.value === "pathanamthitta") {
+        subDistrictSelect.innerHTML += "<option value='adoor'>Adoor</option>";
+        subDistrictSelect.innerHTML += "<option value='konni'>Konni</option>";
+        subDistrictSelect.innerHTML += "<option value='mallapally'>Mallapally</option>";
+        subDistrictSelect.innerHTML += "<option value='pathanamthitta'>Pathanamthitta</option>";
+        subDistrictSelect.innerHTML += "<option value='ranni'>Ranni</option>";
+        subDistrictSelect.innerHTML += "<option value='thiruvalla'>Thiruvalla</option>";
+    } else if (districtSelect.value === "thiruvananthapuram") {
+        subDistrictSelect.innerHTML += "<option value='kollam'>Kollam</option>";
+        subDistrictSelect.innerHTML += "<option value='nemom'>Nemom</option>";
+        subDistrictSelect.innerHTML += "<option value='neyyattinkara'>Neyyattinkara</option>";
+        subDistrictSelect.innerHTML += "<option value='thalayolaparambu'>Thalayolaparambu</option>";
+        subDistrictSelect.innerHTML += "<option value='thiruvananthapuram'>Thiruvananthapuram</option>";
+    } else if (districtSelect.value === "thrissur") {
+  subDistrictSelect.innerHTML += "<option value='choondal'>Choondal</option>";
+  subDistrictSelect.innerHTML += "<option value='guruvayur'>Guruvayur</option>";
+  subDistrictSelect.innerHTML += "<option value='irinjalakuda'>Irinjalakuda</option>";
+  subDistrictSelect.innerHTML += "<option value='kodakara'>Kodakara</option>";
+  subDistrictSelect.innerHTML += "<option value='koratty'>Koratty</option>";
+  subDistrictSelect.innerHTML += "<option value='mala'>Mala</option>";
+  subDistrictSelect.innerHTML += "<option value='mullassery'>Mullassery</option>";
+  subDistrictSelect.innerHTML += "<option value='thiruvilwamala'>Thiruvilwamala</option>";
+  subDistrictSelect.innerHTML += "<option value='thrissur'>Thrissur</option>";
+  subDistrictSelect.innerHTML += "<option value='vadanappally'>Vadanappally</option>";
+  subDistrictSelect.innerHTML += "<option value='vallachira'>Vallachira</option>";
+  subDistrictSelect.innerHTML += "<option value='vellangallur'>Vellangallur</option>";
+  subDistrictSelect.innerHTML += "<option value='wadakkanchery'>Wadakkanchery</option>";
+} else if (districtSelect.value === "wayanad") {
+  subDistrictSelect.innerHTML += "<option value='ambalavayal'>Ambalavayal</option>";
+  subDistrictSelect.innerHTML += "<option value='bathery'>Bathery</option>";
+  subDistrictSelect.innerHTML += "<option value='kaniyambetta'>Kaniyambetta</option>";
+  subDistrictSelect.innerHTML += "<option value='maniyoorkkara'>Maniyoorkkara</option>";
+  subDistrictSelect.innerHTML += "<option value='meenangadi'>Meenangadi</option>";
+  subDistrictSelect.innerHTML += "<option value='muttil'>Muttil</option>";
+  subDistrictSelect.innerHTML += "<option value='panamaram'>Panamaram</option>";
+  subDistrictSelect.innerHTML += "<option value='pulpally'>Pulpally</option>";
+  subDistrictSelect.innerHTML += "<option value='sulthan-batheri'>Sulthan Batheri</option>";
+  subDistrictSelect.innerHTML += "<option value='thariyode'>Thariyode</option>";
+}
+});
+
+const form = document.querySelector("form");
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const successMessage = document.getElementById("success-message");
+  const homeLink = document.getElementById("home-link");
+
+  successMessage.style.display = "block";
+  homeLink.href = "{% url 'index' %}";
+
+    const container = document.querySelector(".login-container");
+    container.innerHTML = "";
+    container.appendChild(messageDiv);
+});
+
+</script>
+
+</body>
+</html>
